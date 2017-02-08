@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Foerder.Services.Tests
 {
     [TestClass]
-    public class FoerderantragServiceTests
+    public class FoerderantragServiceIsAktivTests
     {
         private FoerderantragService _service;
         private DateTime AnyStichtag { get; } = DateTime.Now;
@@ -17,7 +17,7 @@ namespace Foerder.Services.Tests
         }
 
         [TestMethod]
-        public void IsAktiv_WithoutBewilligung_ReturnsFalse()
+        public void WithoutBewilligung_ShouldBeInaktiv()
         {
             var antrag = GetAntragWithoutBewilligung();
 
@@ -28,7 +28,7 @@ namespace Foerder.Services.Tests
         }
 
         [TestMethod]
-        public void IsAktiv_WithBewilligungAndUnrestrictedFreigabe_ReturnsTrue()
+        public void WithBewilligungAndUnrestrictedFreigabe_ShouldBeAktiv()
         {
             var antrag = GetAntragWithUnrestrictedFreigabe();
 
@@ -39,7 +39,7 @@ namespace Foerder.Services.Tests
         }
 
         [TestMethod]
-        public void IsAktiv_AtADateBeforeTheFreigabeValidityDate_ReturnsTrue()
+        public void AtADateBeforeTheFreigabeValidityDate_ShouldBeAktiv()
         {
             var aufrechtBis = new DateTime(2017, 3, 1);
             var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
@@ -51,7 +51,7 @@ namespace Foerder.Services.Tests
         }
 
         [TestMethod]
-        public void IsAktiv_AtTheFreigabeValidityDate_ReturnsTrue()
+        public void AtTheFreigabeValidityDate_ShouldBeAktiv()
         {
             var aufrechtBis = new DateTime(2017, 3, 1);
             var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
@@ -63,7 +63,7 @@ namespace Foerder.Services.Tests
         }
 
         [TestMethod]
-        public void IsAktiv_AtADateAfterTheFreigabeValidityDate_ReturnsFalse()
+        public void AtADateAfterTheFreigabeValidityDate_ShouldBeInaktiv()
         {
             var aufrechtBis = new DateTime(2017, 3, 1);
             var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
