@@ -7,19 +7,25 @@ namespace Foerder.Services.Tests
     [TestClass]
     public class FoerderantragServiceTests
     {
+        private FoerderantragService _service;
         private DateTime AnyStichtag { get; } = DateTime.Now;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _service = new FoerderantragService();
+        }
 
         [TestMethod]
         public void IsAktiv_WithoutBewilligung_ReturnsFalse()
         {
             var antrag = new Foerderantrag();
-            var service = new FoerderantragService();
             
             // Precondition
             Assert.IsNull(antrag.Bewilligung);
 
             // Act
-            var actual = service.IsAktiv(antrag, AnyStichtag);
+            var actual = _service.IsAktiv(antrag, AnyStichtag);
 
             Assert.IsFalse(actual);
         }
@@ -30,10 +36,9 @@ namespace Foerder.Services.Tests
             var freigabe = new Foerdermittelfreigabe {AufrechtBis = null};
             var bewilligung = new Foerderbewilligung {Freigabe = freigabe};
             var antrag = new Foerderantrag {Bewilligung = bewilligung};
-            var service = new FoerderantragService();
 
             // Act
-            var actual = service.IsAktiv(antrag, AnyStichtag);
+            var actual = _service.IsAktiv(antrag, AnyStichtag);
 
             Assert.IsTrue(actual);
         }
