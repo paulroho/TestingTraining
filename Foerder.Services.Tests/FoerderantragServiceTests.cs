@@ -19,10 +19,7 @@ namespace Foerder.Services.Tests
         [TestMethod]
         public void IsAktiv_WithoutBewilligung_ReturnsFalse()
         {
-            var antrag = new Foerderantrag();
-            
-            // Precondition
-            Assert.IsNull(antrag.Bewilligung);
+            var antrag = GetAntragWithoutBewilligung();
 
             // Act
             var actual = _service.IsAktiv(antrag, AnyStichtag);
@@ -33,14 +30,29 @@ namespace Foerder.Services.Tests
         [TestMethod]
         public void IsAktiv_WithBewilligungAndUnrestrictedFreigabe_ReturnsTrue()
         {
-            var freigabe = new Foerdermittelfreigabe {AufrechtBis = null};
-            var bewilligung = new Foerderbewilligung {Freigabe = freigabe};
-            var antrag = new Foerderantrag {Bewilligung = bewilligung};
+            var antrag = GetAntragWithUnrestrictedFreigabe();
 
             // Act
             var actual = _service.IsAktiv(antrag, AnyStichtag);
 
             Assert.IsTrue(actual);
+        }
+
+        private static Foerderantrag GetAntragWithUnrestrictedFreigabe()
+        {
+            var freigabe = new Foerdermittelfreigabe {AufrechtBis = null};
+            var bewilligung = new Foerderbewilligung {Freigabe = freigabe};
+            return new Foerderantrag {Bewilligung = bewilligung};
+        }
+
+        private static Foerderantrag GetAntragWithoutBewilligung()
+        {
+            var antrag = new Foerderantrag();
+
+            if (antrag.Bewilligung != null)
+                throw new Exception("The Antrag must not have a Bewilligung.");
+
+            return antrag;
         }
     }
 }
