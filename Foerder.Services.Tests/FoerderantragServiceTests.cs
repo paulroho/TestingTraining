@@ -23,5 +23,19 @@ namespace Foerder.Services.Tests
 
             Assert.IsFalse(actual);
         }
+
+        [TestMethod]
+        public void IsAktiv_WithBewilligungAndUnrestrictedFreigabe_ReturnsTrue()
+        {
+            var freigabe = new Foerdermittelfreigabe {AufrechtBis = null};
+            var bewilligung = new Foerderbewilligung {Freigabe = freigabe};
+            var antrag = new Foerderantrag {Bewilligung = bewilligung};
+            var service = new FoerderantragService();
+
+            // Act
+            var actual = service.IsAktiv(antrag, AnyStichtag);
+
+            Assert.IsTrue(actual);
+        }
     }
 }
