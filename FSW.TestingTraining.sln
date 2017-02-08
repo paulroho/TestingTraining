@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foerder.Domain", "Foerder.Domain\Foerder.Domain.csproj", "{2CD0B21F-00B2-456F-96C8-58222A6AA14A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foerder.Services", "Foerder.Services\Foerder.Services.csproj", "{DAFBDB1C-A69A-4550-AD71-C6A8F916FC27}"
 EndProject
 Global
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CD0B21F-00B2-456F-96C8-58222A6AA14A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD0B21F-00B2-456F-96C8-58222A6AA14A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD0B21F-00B2-456F-96C8-58222A6AA14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD0B21F-00B2-456F-96C8-58222A6AA14A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DAFBDB1C-A69A-4550-AD71-C6A8F916FC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAFBDB1C-A69A-4550-AD71-C6A8F916FC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAFBDB1C-A69A-4550-AD71-C6A8F916FC27}.Release|Any CPU.ActiveCfg = Release|Any CPU

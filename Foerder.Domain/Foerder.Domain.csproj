@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DAFBDB1C-A69A-4550-AD71-C6A8F916FC27}</ProjectGuid>
+    <ProjectGuid>{2CD0B21F-00B2-456F-96C8-58222A6AA14A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Foerder.Services</RootNamespace>
-    <AssemblyName>Foerder.Services</AssemblyName>
+    <RootNamespace>Foerder.Domain</RootNamespace>
+    <AssemblyName>Foerder.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,15 +34,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OriginalCode\CodeFromMLI.cs" />
-    <Compile Include="FoerderantragService.cs" />
+    <Compile Include="Foerderantrag.cs" />
+    <Compile Include="Foerderbewilligung.cs" />
+    <Compile Include="Foerdermittelfreigabe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Foerder.Domain\Foerder.Domain.csproj">
-      <Project>{2CD0B21F-00B2-456F-96C8-58222A6AA14A}</Project>
-      <Name>Foerder.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
