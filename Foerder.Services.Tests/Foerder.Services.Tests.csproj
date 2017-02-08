@@ -68,6 +68,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="NotificationServiceTests.cs" />
     <Compile Include="TestDataBuilders\AFoerder.cs" />
     <Compile Include="TestDataBuilders\AntragBuilder.cs" />
     <Compile Include="FoerderantragServiceIsAktivTests.cs" />
