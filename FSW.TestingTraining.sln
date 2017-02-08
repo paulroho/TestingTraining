@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{E8E0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foerder.Services.Tests", "Foerder.Services.Tests\Foerder.Services.Tests.csproj", "{CADA8526-1B79-411E-96B0-4552EB825503}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foerder.Services.Spec", "Foerder.Services.Spec\Foerder.Services.Spec.csproj", "{E360E6E9-5B00-4B38-BF03-05F8534872ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +31,16 @@ Global
 		{CADA8526-1B79-411E-96B0-4552EB825503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CADA8526-1B79-411E-96B0-4552EB825503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CADA8526-1B79-411E-96B0-4552EB825503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E360E6E9-5B00-4B38-BF03-05F8534872ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E360E6E9-5B00-4B38-BF03-05F8534872ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E360E6E9-5B00-4B38-BF03-05F8534872ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E360E6E9-5B00-4B38-BF03-05F8534872ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CADA8526-1B79-411E-96B0-4552EB825503} = {E8E044AC-994C-413A-B272-519310D619E2}
+		{E360E6E9-5B00-4B38-BF03-05F8534872ED} = {E8E044AC-994C-413A-B272-519310D619E2}
 	EndGlobalSection
 EndGlobal
