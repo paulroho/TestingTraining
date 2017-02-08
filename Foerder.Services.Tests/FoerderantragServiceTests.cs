@@ -22,9 +22,9 @@ namespace Foerder.Services.Tests
             var antrag = GetAntragWithoutBewilligung();
 
             // Act
-            var actual = _service.IsAktiv(antrag, AnyStichtag);
+            var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
 
-            Assert.IsFalse(actual);
+            Assert.IsFalse(isAktiv);
         }
 
         [TestMethod]
@@ -33,14 +33,54 @@ namespace Foerder.Services.Tests
             var antrag = GetAntragWithUnrestrictedFreigabe();
 
             // Act
-            var actual = _service.IsAktiv(antrag, AnyStichtag);
+            var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
 
-            Assert.IsTrue(actual);
+            Assert.IsTrue(isAktiv);
         }
 
-        private static Foerderantrag GetAntragWithUnrestrictedFreigabe()
+        [TestMethod]
+        public void IsAktiv_AtADateBeforeTheFreigabeValidityDate_ReturnsTrue()
         {
-            var freigabe = new Foerdermittelfreigabe {AufrechtBis = null};
+            var aufrechtBis = new DateTime(2017, 3, 1);
+            var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
+
+            // Act
+            var isAktiv = _service.IsAktiv(antrag, stichtag:aufrechtBis.AddDays(-1));
+
+            Assert.IsTrue(isAktiv);
+        }
+
+        [TestMethod]
+        public void IsAktiv_AtTheFreigabeValidityDate_ReturnsTrue()
+        {
+            var aufrechtBis = new DateTime(2017, 3, 1);
+            var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
+
+            // Act
+            var isAktiv = _service.IsAktiv(antrag, stichtag: aufrechtBis);
+
+            Assert.IsTrue(isAktiv);
+        }
+
+        [TestMethod]
+        public void IsAktiv_AtADateAfterTheFreigabeValidityDate_ReturnsFalse()
+        {
+            var aufrechtBis = new DateTime(2017, 3, 1);
+            var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
+
+            // Act
+            var isAktiv = _service.IsAktiv(antrag, stichtag: aufrechtBis.AddDays(+1));
+
+            Assert.IsFalse(isAktiv);
+        }
+
+        private static Foerderantrag GetAntragWithFreigabeUntil(DateTime aufrechtBis) => GetAntragWithFreigabe(aufrechtBis);
+
+        private static Foerderantrag GetAntragWithUnrestrictedFreigabe() => GetAntragWithFreigabe(null);
+
+        private static Foerderantrag GetAntragWithFreigabe(DateTime? stichtag)
+        {
+            var freigabe = new Foerdermittelfreigabe {AufrechtBis = stichtag};
             var bewilligung = new Foerderbewilligung {Freigabe = freigabe};
             return new Foerderantrag {Bewilligung = bewilligung};
         }
