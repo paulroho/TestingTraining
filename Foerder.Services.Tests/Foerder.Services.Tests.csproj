@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestDataBuilders\AFoerder.cs" />
+    <Compile Include="TestDataBuilders\AntragBuilder.cs" />
     <Compile Include="FoerderantragServiceIsAktivTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

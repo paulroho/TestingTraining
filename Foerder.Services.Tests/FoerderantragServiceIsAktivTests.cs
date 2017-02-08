@@ -1,5 +1,5 @@
 ﻿using System;
-using Foerder.Domain;
+using Foerder.Services.Tests.TestDataBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Foerder.Services.Tests
@@ -19,7 +19,7 @@ namespace Foerder.Services.Tests
         [TestMethod]
         public void WithoutBewilligung_ShouldBeInaktiv()
         {
-            var antrag = GetAntragWithoutBewilligung();
+            var antrag = AFoerder.Antrag.WithoutBewilligung();
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
@@ -30,7 +30,7 @@ namespace Foerder.Services.Tests
         [TestMethod]
         public void WithBewilligungAndUnrestrictedFreigabe_ShouldBeAktiv()
         {
-            var antrag = GetAntragWithUnrestrictedFreigabe();
+            var antrag = AFoerder.Antrag.WithUnrestrictedFreigabe();
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
@@ -42,7 +42,7 @@ namespace Foerder.Services.Tests
         public void AtADateBeforeTheFreigabeValidityDate_ShouldBeAktiv()
         {
             var aufrechtBis = new DateTime(2017, 3, 1);
-            var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
+            var antrag = AFoerder.Antrag.WithFreigabeUntil(aufrechtBis);
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, stichtag:aufrechtBis.AddDays(-1));
@@ -54,7 +54,7 @@ namespace Foerder.Services.Tests
         public void AtTheFreigabeValidityDate_ShouldBeAktiv()
         {
             var aufrechtBis = new DateTime(2017, 3, 1);
-            var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
+            var antrag = AFoerder.Antrag.WithFreigabeUntil(aufrechtBis);
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, stichtag: aufrechtBis);
@@ -66,33 +66,12 @@ namespace Foerder.Services.Tests
         public void AtADateAfterTheFreigabeValidityDate_ShouldBeInaktiv()
         {
             var aufrechtBis = new DateTime(2017, 3, 1);
-            var antrag = GetAntragWithFreigabeUntil(aufrechtBis);
+            var antrag = AFoerder.Antrag.WithFreigabeUntil(aufrechtBis);
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, stichtag: aufrechtBis.AddDays(+1));
 
             Assert.IsFalse(isAktiv);
-        }
-
-        private static Foerderantrag GetAntragWithFreigabeUntil(DateTime aufrechtBis) => GetAntragWithFreigabe(aufrechtBis);
-
-        private static Foerderantrag GetAntragWithUnrestrictedFreigabe() => GetAntragWithFreigabe(null);
-
-        private static Foerderantrag GetAntragWithFreigabe(DateTime? stichtag)
-        {
-            var freigabe = new Foerdermittelfreigabe {AufrechtBis = stichtag};
-            var bewilligung = new Foerderbewilligung {Freigabe = freigabe};
-            return new Foerderantrag {Bewilligung = bewilligung};
-        }
-
-        private static Foerderantrag GetAntragWithoutBewilligung()
-        {
-            var antrag = new Foerderantrag();
-
-            if (antrag.Bewilligung != null)
-                throw new Exception("The Antrag must not have a Bewilligung.");
-
-            return antrag;
         }
     }
 }
