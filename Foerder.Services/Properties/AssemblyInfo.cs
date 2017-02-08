@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FSW.TestingTraining")]
+[assembly: AssemblyTitle("Foerder.Services")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FSW.TestingTraining")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("Foerder.Services")]
+[assembly: AssemblyCopyright("Copyright © 2017 by TechTalk")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
