@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Foerder.Services.Tests.TestDataBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,7 +25,7 @@ namespace Foerder.Services.Tests
             // Act
             var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
 
-            Assert.IsFalse(isAktiv);
+            isAktiv.Should().BeFalse();
         }
 
         [TestMethod]
@@ -35,7 +36,7 @@ namespace Foerder.Services.Tests
             // Act
             var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
 
-            Assert.IsTrue(isAktiv);
+            isAktiv.Should().BeTrue();
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace Foerder.Services.Tests
             // Act
             var isAktiv = _service.IsAktiv(antrag, stichtag:aufrechtBis.AddDays(-1));
 
-            Assert.IsTrue(isAktiv);
+            isAktiv.Should().BeTrue();
         }
 
         [TestMethod]
@@ -59,7 +60,7 @@ namespace Foerder.Services.Tests
             // Act
             var isAktiv = _service.IsAktiv(antrag, stichtag: aufrechtBis);
 
-            Assert.IsTrue(isAktiv);
+            isAktiv.Should().BeTrue();
         }
 
         [TestMethod]
@@ -71,7 +72,7 @@ namespace Foerder.Services.Tests
             // Act
             var isAktiv = _service.IsAktiv(antrag, stichtag: aufrechtBis.AddDays(+1));
 
-            Assert.IsFalse(isAktiv);
+            isAktiv.Should().BeFalse();
         }
     }
 }
