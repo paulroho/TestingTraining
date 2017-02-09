@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Foerder.Services.Tests.TestDataBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Foerder.Services.Tests
 {
@@ -9,21 +11,24 @@ namespace Foerder.Services.Tests
     public class FoerderantragServiceIsAktivTests
     {
         private FoerderantragService _service;
+        private Mock<IConfigurationProvider> _configProviderFake;
         private DateTime AnyStichtag { get; } = DateTime.Now;
 
         [TestInitialize]
         public void Initialize()
         {
-            var configProvider = new ConfigurationProvider();
-            _service = new FoerderantragService(configProvider);
+            _configProviderFake = new Mock<IConfigurationProvider>();
+            _service = new FoerderantragService(_configProviderFake.Object);
         }
 
         [TestMethod]
         public void WithoutBewilligung_ShouldConsiderStatesFromConfigByDataSourceAsAktiv()
         {
             var antrag = AFoerder.Antrag.WithoutBewilligung();
-            antrag.DataSource = "KVS";
-            antrag.Status = "in Bearb.";
+            antrag.DataSource = "MyDataSource";
+            antrag.Status = "State1";
+            _configProviderFake.Setup(p => p.GetStatusAntragAufrechtByDataSource("MyDataSource"))
+                .Returns(new[] {"State1", "State2"}.ToList());
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
@@ -35,8 +40,25 @@ namespace Foerder.Services.Tests
         public void WithoutBewilligung_ShouldConsiderStatesNotInConfigByDataSourceAsInaktiv()
         {
             var antrag = AFoerder.Antrag.WithoutBewilligung();
-            antrag.DataSource = "KVS";
-            antrag.Status = "Not a state in config";
+            antrag.DataSource = "MyDataSource";
+            antrag.Status = "State Three";
+            _configProviderFake.Setup(p => p.GetStatusAntragAufrechtByDataSource("MyDataSource"))
+                .Returns(new[] { "State1", "State2" }.ToList());
+
+            // Act
+            var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
+
+            isAktiv.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void WithoutBewilligung_ShouldNotConsiderStatesInConfigForOtherDataSourceAsAktiv()
+        {
+            var antrag = AFoerder.Antrag.WithoutBewilligung();
+            antrag.DataSource = "MyDataSource";
+            antrag.Status = "State1";
+            _configProviderFake.Setup(p => p.GetStatusAntragAufrechtByDataSource("AVeryDifferentDataSource"))
+                .Returns(new[] { "State1", "State2" }.ToList());
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
