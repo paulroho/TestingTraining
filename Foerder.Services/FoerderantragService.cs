@@ -5,9 +5,9 @@ namespace Foerder.Services
 {
     public class FoerderantragService
     {
-        private readonly ConfigurationProvider _configurationProvider;
+        private readonly IConfigurationProvider _configurationProvider;
 
-        public FoerderantragService(ConfigurationProvider configurationProvider)
+        public FoerderantragService(IConfigurationProvider configurationProvider)
         {
             _configurationProvider = configurationProvider;
         }

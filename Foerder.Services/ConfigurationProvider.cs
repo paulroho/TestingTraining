@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Foerder.Services
 {
-    public class ConfigurationProvider
+    public class ConfigurationProvider : IConfigurationProvider
     {
         public List<string> GetStatusAntragAufrechtByDataSource(string dataSource)
         {
