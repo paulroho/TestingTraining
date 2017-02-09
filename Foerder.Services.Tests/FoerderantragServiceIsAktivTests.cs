@@ -18,9 +18,24 @@ namespace Foerder.Services.Tests
         }
 
         [TestMethod]
-        public void WithoutBewilligung_ShouldBeInaktiv()
+        public void WithoutBewilligung_ShouldConsiderStatesFromConfigByDataSourceAsAktiv()
         {
             var antrag = AFoerder.Antrag.WithoutBewilligung();
+            antrag.DataSource = "KVS";
+            antrag.Status = "in Bearb.";
+
+            // Act
+            var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
+
+            isAktiv.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void WithoutBewilligung_ShouldConsiderStatesNotInConfigByDataSourceAsInaktiv()
+        {
+            var antrag = AFoerder.Antrag.WithoutBewilligung();
+            antrag.DataSource = "KVS";
+            antrag.Status = "Not a state in config";
 
             // Act
             var isAktiv = _service.IsAktiv(antrag, AnyStichtag);
