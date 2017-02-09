@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="OriginalCode\CodeFromMLI.cs" />
+    <Compile Include="ConfigurationProvider.cs" />
     <Compile Include="FoerderantragService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

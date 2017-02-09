@@ -14,7 +14,8 @@ namespace Foerder.Services.Tests
         [TestInitialize]
         public void Initialize()
         {
-            _service = new FoerderantragService();
+            var configProvider = new ConfigurationProvider();
+            _service = new FoerderantragService(configProvider);
         }
 
         [TestMethod]
