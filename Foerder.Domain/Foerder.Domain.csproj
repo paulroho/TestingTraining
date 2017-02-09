@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NotificationType.cs" />
     <Compile Include="Foerderantrag.cs" />
     <Compile Include="Foerderbewilligung.cs" />
     <Compile Include="Foerdermittelfreigabe.cs" />

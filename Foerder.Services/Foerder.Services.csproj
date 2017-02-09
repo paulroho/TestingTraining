@@ -36,7 +36,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="OriginalCode\CodeFromMLI.cs" />
+    <Compile Include="ConfigurationProvider.cs" />
     <Compile Include="FoerderantragService.cs" />
+    <Compile Include="IConfigurationProvider.cs" />
+    <Compile Include="IEmailer.cs" />
+    <Compile Include="ISmsGateway.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
