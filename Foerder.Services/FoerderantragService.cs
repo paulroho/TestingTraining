@@ -16,10 +16,15 @@ namespace Foerder.Services
                 return !freigabe.AufrechtBis.HasValue || (freigabe.AufrechtBis.Value >= stichtag);
             }
 
-            var filterKeyPerDataSource = "StatusAntragAufrecht_" + antrag.DataSource;
-            var statusAntragAufrecht = GetSemicolonSeparatedAppSetting(filterKeyPerDataSource);
+            var statusAntragAufrecht = GetStatusAntragAufrechtByDataSource(antrag.DataSource);
             return (statusAntragAufrecht != null) &&
                     statusAntragAufrecht.Contains(antrag.Status ?? string.Empty);
+        }
+
+        private List<string> GetStatusAntragAufrechtByDataSource(string dataSource)
+        {
+            var filterKeyPerDataSource = "StatusAntragAufrecht_" + dataSource;
+            return GetSemicolonSeparatedAppSetting(filterKeyPerDataSource);
         }
 
         private List<string> GetSemicolonSeparatedAppSetting(string key)
